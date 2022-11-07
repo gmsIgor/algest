@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.rmd": "markdown",
+        "stdio.h": "c",
+        "doublylinkedlist.h": "c",
+        "stdlib.h": "c"
+    }
+}
