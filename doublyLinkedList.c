@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include "doublyLinkedList.h"
 
-Node *getFirstElmnt(List *lst)
+Node *Lkd_GetFirstElmnt(List *lst)
 {
     return lst->list;
 }
 
-Node *getLastElmnt(List *lst)
+Node *Lkd_GetLastElmnt(List *lst)
 {
     return lst->lastElmnt;
 }
 
-List *createNPopulateList(int data[], int dataLength)
+List *Lkd_CreateNPopulateList(int data[], int dataLength)
 {
     List *lst;
     lst = (List *)malloc(sizeof(List));
@@ -23,13 +23,13 @@ List *createNPopulateList(int data[], int dataLength)
     int i;
     for (i = 0; i < dataLength; i++)
     {
-        pushBack(lst, data[i]);
+        Lkd_PushBack(lst, data[i]);
     }
 
     return lst;
 }
 
-void pushBack(List *lst, int data)
+void Lkd_PushBack(List *lst, int data)
 {
     Node *Elmnt;
     Elmnt = (Node *)malloc(sizeof(Node));
@@ -51,7 +51,7 @@ void pushBack(List *lst, int data)
     lst->counter++;
 }
 
-void pushFront(List *lst, int data)
+void Lkd_PushFront(List *lst, int data)
 {
     Node *Elmnt;
     Elmnt = (Node *)malloc(sizeof(Node));
@@ -73,13 +73,13 @@ void pushFront(List *lst, int data)
     lst->counter++;
 }
 
-void push(List *lst, int n, int data)
+void Lkd_Push(List *lst, int n, int data)
 {
-    Node *currentN = getElement(lst, n);
+    Node *currentN = Lkd_GetElement(lst, n);
 
     if (currentN == NULL)
     {
-        pushBack(lst, data);
+        Lkd_PushBack(lst, data);
         return;
     }
 
@@ -93,7 +93,7 @@ void push(List *lst, int n, int data)
     lst->counter++;
 }
 
-void printList(List *lst)
+void Lkd_PrintList(List *lst)
 {
     int i;
     Node *currentElmnt = lst->list;
@@ -107,7 +107,7 @@ void printList(List *lst)
     printf("}\n");
 }
 
-Node *getElement(List *lst, int n)
+Node *Lkd_GetElement(List *lst, int n)
 {
     if (lst->counter < n)
     {
@@ -140,14 +140,14 @@ Node *getElement(List *lst, int n)
     return currentElmnt;
 }
 
-int count(List *lst)
+int Lkd_Count(List *lst)
 {
     return lst->counter;
 }
 
-void pop(List *lst, int n)
+void Lkd_Pop(List *lst, int n)
 {
-    Node *elmnt = getElement(lst, n);
+    Node *elmnt = Lkd_GetElement(lst, n);
     if (elmnt == NULL)
     {
         return;
@@ -175,7 +175,7 @@ void pop(List *lst, int n)
     free(elmnt);
 }
 
-void popBack(List *lst)
+void Lkd_PopBack(List *lst)
 {
     Node *elmnt = lst->lastElmnt;
     if (elmnt == NULL)
@@ -198,7 +198,7 @@ void popBack(List *lst)
     free(elmnt);
 }
 
-void popFront(List *lst)
+void Lkd_PopFront(List *lst)
 {
     Node *elmnt = lst->list;
     if (elmnt == NULL)
@@ -221,13 +221,13 @@ void popFront(List *lst)
     free(elmnt);
 }
 
-void clear(List *lst)
+void Lkd_Clear(List *lst)
 {
     int i = lst->counter;
 
     while (i > 0)
     {
-        popFront(lst);
+        Lkd_PopFront(lst);
         i--;
     }
 }
