@@ -97,19 +97,14 @@ void printList(List *lst)
 {
     int i;
     Node *currentElmnt = lst->list;
-
+    printf("{");
     for (i = 0; i < lst->counter; i++)
     {
-        if (currentElmnt == lst->lastElmnt)
-        {
-            printf("%d.\n", currentElmnt->data);
-        }
-        else
-        {
-            printf("%d, ", currentElmnt->data);
-        }
+
+        printf(" <-[ %d ]-> ", currentElmnt->data);
         currentElmnt = currentElmnt->next;
     }
+    printf("}\n");
 }
 
 Node *getElement(List *lst, int n)
