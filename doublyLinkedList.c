@@ -15,7 +15,7 @@ Node *getLastElmnt(List *lst)
 List *createNPopulateList(int data[], int dataLength)
 {
     List *lst;
-    lst = malloc(sizeof(List));
+    lst = (List *)malloc(sizeof(List));
     lst->counter = 0;
     lst->list = NULL;
     lst->lastElmnt = NULL;
@@ -23,16 +23,16 @@ List *createNPopulateList(int data[], int dataLength)
     int i;
     for (i = 0; i < dataLength; i++)
     {
-        addElmntToList(lst, data[i]);
+        pushBack(lst, data[i]);
     }
 
     return lst;
 }
 
-void addElmntToList(List *lst, int data)
+void pushBack(List *lst, int data)
 {
     Node *Elmnt;
-    Elmnt = malloc(sizeof(Node));
+    Elmnt = (Node *)malloc(sizeof(Node));
 
     if (lst->list == NULL)
     {
@@ -45,9 +45,51 @@ void addElmntToList(List *lst, int data)
     }
 
     Elmnt->previous = lst->lastElmnt;
-    lst->lastElmnt = Elmnt;
     Elmnt->data = data;
     Elmnt->next = NULL;
+    lst->lastElmnt = Elmnt;
+    lst->counter++;
+}
+
+void pushFront(List *lst, int data)
+{
+    Node *Elmnt;
+    Elmnt = (Node *)malloc(sizeof(Node));
+
+    if (lst->lastElmnt == NULL)
+    {
+        lst->lastElmnt = Elmnt;
+    }
+
+    if (lst->list != NULL)
+    {
+        lst->list->previous = Elmnt;
+    }
+
+    Elmnt->next = lst->list;
+    Elmnt->previous = NULL;
+    Elmnt->data = data;
+    lst->list = Elmnt;
+    lst->counter++;
+}
+
+void push(List *lst, int n, int data)
+{
+    Node *currentN = getElement(lst, n);
+
+    if (currentN == NULL)
+    {
+        pushBack(lst, data);
+        return;
+    }
+
+    Node *newElmnt = (Node *)malloc(sizeof(Node));
+
+    newElmnt->previous = currentN->previous;
+    newElmnt->next = currentN;
+    currentN->previous->next = newElmnt;
+    currentN->previous = newElmnt;
+    newElmnt->data = data;
     lst->counter++;
 }
 
@@ -103,12 +145,12 @@ Node *getElement(List *lst, int n)
     return currentElmnt;
 }
 
-int getListLength(List *lst)
+int count(List *lst)
 {
     return lst->counter;
 }
 
-void removeElmnt(List *lst, int n)
+void pop(List *lst, int n)
 {
     Node *elmnt = getElement(lst, n);
     if (elmnt == NULL)
@@ -136,4 +178,61 @@ void removeElmnt(List *lst, int n)
 
     lst->counter -= 1;
     free(elmnt);
+}
+
+void popBack(List *lst)
+{
+    Node *elmnt = lst->lastElmnt;
+    if (elmnt == NULL)
+    {
+        return;
+    }
+
+    if (lst->counter > 1)
+    {
+        elmnt->previous->next = NULL;
+        lst->lastElmnt = elmnt->previous;
+    }
+    else
+    {
+        lst->lastElmnt = NULL;
+        lst->list = NULL;
+    }
+
+    lst->counter -= 1;
+    free(elmnt);
+}
+
+void popFront(List *lst)
+{
+    Node *elmnt = lst->list;
+    if (elmnt == NULL)
+    {
+        return;
+    }
+
+    if (lst->counter > 1)
+    {
+        elmnt->next->previous = NULL;
+        lst->list = elmnt->next;
+    }
+    else
+    {
+        lst->lastElmnt = NULL;
+        lst->list = NULL;
+    }
+
+    lst->counter -= 1;
+    free(elmnt);
+}
+
+void clear(List *lst)
+{
+    int i = lst->counter;
+
+    while (i > 0)
+    {
+        popFront(lst);
+        i--;
+    }
 }
