@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "doublyLinkedList.h"
+
+#include "DoublyLinkedList.h"
 
 Node *Lkd_GetFirstElmnt(List *lst)
 {
@@ -97,14 +98,14 @@ void Lkd_PrintList(List *lst)
 {
     int i;
     Node *currentElmnt = lst->list;
-    printf("{");
+    printf("{ NULL ");
     for (i = 0; i < lst->counter; i++)
     {
 
         printf(" <-[ %d ]-> ", currentElmnt->data);
         currentElmnt = currentElmnt->next;
     }
-    printf("}\n");
+    printf(" NULL }\n");
 }
 
 Node *Lkd_GetElement(List *lst, int n)

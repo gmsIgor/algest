@@ -1,3 +1,5 @@
+#ifndef DOUBLY_LINKED_LIST_H
+#define DOUBLY_LINKED_LIST_H
 
 typedef struct Node
 {
@@ -79,3 +81,5 @@ void Lkd_PopFront(List *lst);
  * If there is any, remove all the elements from the list.
  */
 void Lkd_Clear(List *lst);
+
+#endif

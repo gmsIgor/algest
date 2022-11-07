@@ -8,7 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "doublyLinkedList.c",
+                "DoublyLinkedList.c",
                 "-o",
                 "${fileDirname}/build/${fileBasenameNoExtension}",
                 "-lm"
