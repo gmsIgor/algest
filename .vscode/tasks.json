@@ -10,7 +10,7 @@
                 "${file}",
                 "doublyLinkedList.c",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
+                "${fileDirname}/build/${fileBasenameNoExtension}",
                 "-lm"
             ],
             "options": {
